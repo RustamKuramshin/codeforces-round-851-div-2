@@ -51,21 +51,33 @@ public class Task2 {
     }
 
     public static void main(String[] args) throws IOException {
+
         Reader.init(System.in);
         out = new PrintWriter(new BufferedOutputStream(System.out));
-
-        // Далее идет ваш код
-
-        // Пример чтения строк, целых и вещественных чисел
-        Reader.next();
-        Reader.nextInt();
-        Reader.nextDouble();
-
-        // Пишем в ответ
-        out.println("Test");
-
-
-        // Отправить накопленный вывод на stdout
+        int countT = Reader.nextInt();
+        for (int i = 0; i < countT;i++){
+            int num = Reader.nextInt();
+            int numDelet = num / 2;
+            if (num % 2 == 0){
+                out.println(num + " " + num);
+            }
+            int first = numDelet + 1;
+            int second = numDelet;
+            while ((pluser(first) - (pluser(second))) != 1 && (pluser(first) - (pluser(second))) != 0 ){
+                first++;
+                second--;
+            }
+            out.println(first + " " + second);
+        }
         out.close();
+    }
+
+    public static int pluser(int num){
+        int sum = 0;
+        while(num != 0){
+            sum += (num % 10);
+            num/=10;
+        }
+        return sum;
     }
 }
