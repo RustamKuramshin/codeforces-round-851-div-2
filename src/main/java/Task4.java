@@ -32,24 +32,6 @@ public class Task4 {
         static int nextInt() throws IOException {
             return Integer.parseInt(next());
         }
-
-        static long nextLong() throws IOException {
-            return Long.parseLong(next());
-        }
-
-        static double nextDouble() throws IOException {
-            return Double.parseDouble(next());
-        }
-
-        static String nextLine() {
-            String str = "";
-            try {
-                str = reader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return str;
-        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -60,16 +42,19 @@ public class Task4 {
         for (int i = 0; i < n; i++) {
             points[i] = Reader.nextInt();
         }
-        int result = 0;
+        int nn = n * (n - 1);
+        int result = nn / 2 + nn * (n - 2) / 6;
         List<Integer> list = new ArrayList<>();
         for (int mask = 0; mask < (1 << n); mask++) { // перебор масок
             for (int j = 0; j < n; j++) { // перебор индексов массива
-                if((mask & (1 << j)) != 0) { // поиск индекса в маске
+                if ((mask & (1 << j)) != 0) { // поиск индекса в маске
                     list.add(points[j]); // yield
                 }
             }
-            result += calcResult(list);
-            list.clear(); // перевод строки для вывод следующего подмножества
+            if (list.size() > 3) {
+                result += calcResult(list);
+            }
+            list.clear();
         }
         int delimiter = (int) 1e9 + 7;
         out.println(result % delimiter);
@@ -77,20 +62,14 @@ public class Task4 {
     }
 
     private static int calcResult(List<Integer> list) {
-        int size = list.size();
-        if (size == 0 || size == 1) {
-            return 0;
-        }
-        if (size == 2 || size == 3) {
-            return 1;
-        }
-        int coef = 0;
-        if (list.get(1) - list.get(0) <= list.get(2) - list.get(1)) {
-            if (list.get(2) - list.get(1) > list.get(3) - list.get(2)) {
-                coef = 1;
+        int result = 1;
+        for (int i = 1; i < list.size() - 2; i++) {
+            if (list.get(i) - list.get(i - 1) <= list.get(i + 1) - list.get(i)) {
+                if (list.get(i + 1) - list.get(i) > list.get(i + 2) - list.get(i + 1)) {
+                    result += 1;
+                }
             }
         }
-        list.remove(0);
-        return calcResult(list) + coef;
+        return result;
     }
 }
