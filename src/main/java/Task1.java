@@ -53,7 +53,6 @@ public class Task1 {
     public static void main(String[] args) throws IOException {
         Reader.init(System.in);
         out = new PrintWriter(new BufferedOutputStream(System.out));
-        int result = -1;
         int countTests = Reader.nextInt();
         for (int i = 0; i < countTests; i++) {
             int countNumbers = Reader.nextInt();
@@ -71,11 +70,11 @@ public class Task1 {
                 for (int k = j + 1; k <= countNumbers; k++) {
                     right *= allNumbers[k];
                 }
-                if (left == right) {
-                    out.println(j);
+                if (j == countNumbers) {
+                    out.println(-1);
                     break;
-                } else if (j == countNumbers) {
-                    out.println(result);
+                } else if (left == right) {
+                    out.println(j);
                     break;
                 }
             }
