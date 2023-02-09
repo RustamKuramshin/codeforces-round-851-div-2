@@ -59,7 +59,8 @@ public class Task2 {
             int num = Reader.nextInt();
             int numDelet = num / 2;
             if (num % 2 == 0){
-                out.println(num + " " + num);
+                out.println(num/2 + " " + num/2);
+                continue;
             }
             int first = numDelet + 1;
             int second = numDelet;
