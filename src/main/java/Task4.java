@@ -33,8 +33,22 @@ public class Task4 {
             return Integer.parseInt(next());
         }
 
+        static long nextLong() throws IOException {
+            return Long.parseLong(next());
+        }
+
         static double nextDouble() throws IOException {
             return Double.parseDouble(next());
+        }
+
+        static String nextLine() {
+            String str = "";
+            try {
+                str = reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
         }
     }
 
