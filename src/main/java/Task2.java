@@ -65,8 +65,12 @@ public class Task2 {
             int first = numDelet + 1;
             int second = numDelet;
             while ((pluser(first) - (pluser(second))) != 1 && (pluser(first) - (pluser(second))) != 0 ){
-                first++;
-                second--;
+                first += second / 2;
+                if (second % 2 == 0){
+                    second = (second / 2);
+                }else {
+                    second = (second / 2) + 1;
+                }
             }
             out.println(first + " " + second);
         }
