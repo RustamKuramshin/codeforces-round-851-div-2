@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Task1 {
@@ -53,19 +54,33 @@ public class Task1 {
     public static void main(String[] args) throws IOException {
         Reader.init(System.in);
         out = new PrintWriter(new BufferedOutputStream(System.out));
-
-        // Далее идет ваш код
-
-        // Пример чтения строк, целых и вещественных чисел
-        Reader.next();
-        Reader.nextInt();
-        Reader.nextDouble();
-
-        // Пишем в ответ
-        out.println("Test");
-
-
-        // Отправить накопленный вывод на stdout
+        int result = -1;
+        int countTests = Reader.nextInt();
+        for (int i = 0; i < countTests; i++) {
+            int countNumbers = Reader.nextInt();
+            int[] allNumbers = new int[countNumbers + 1];
+            for (int j = 1; j <= countNumbers; j++) {
+                int currentNumber = Reader.nextInt();
+                allNumbers[j] = currentNumber;
+            }
+            for (int j = 1; j <= countNumbers; j++) {
+                int left = 1;
+                int right = 1;
+                for (int k = 1; k <= j; k++) {
+                    left *= allNumbers[k];
+                }
+                for (int k = j + 1; k <= countNumbers; k++) {
+                    right *= allNumbers[k];
+                }
+                if (left == right) {
+                    out.println(j);
+                    break;
+                }
+                if (j == countNumbers) {
+                    out.println(result);
+                }
+            }
+        }
         out.close();
     }
 }
