@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Task1 {
@@ -22,7 +21,7 @@ public class Task1 {
         }
 
         static String next() throws IOException {
-            while ( ! tokenizer.hasMoreTokens() ) {
+            while (!tokenizer.hasMoreTokens()) {
                 tokenizer = new StringTokenizer(reader.readLine());
             }
             return tokenizer.nextToken();
@@ -75,9 +74,9 @@ public class Task1 {
                 if (left == right) {
                     out.println(j);
                     break;
-                }
-                if (j == countNumbers) {
+                } else if (j == countNumbers) {
                     out.println(result);
+                    break;
                 }
             }
         }
