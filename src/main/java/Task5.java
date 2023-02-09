@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Task5 {
@@ -54,18 +55,45 @@ public class Task5 {
         Reader.init(System.in);
         out = new PrintWriter(new BufferedOutputStream(System.out));
 
-        // Далее идет ваш код
+        int n = Reader.nextInt();
 
-        // Пример чтения строк, целых и вещественных чисел
-        Reader.next();
-        Reader.nextInt();
-        Reader.nextDouble();
+        int[] arr = new int[n];
+        int arrSum = 0;
+        boolean allNeg = true;
 
-        // Пишем в ответ
-        out.println("Test");
+        for (int i = 0; i < n; i++) {
+            int num = Reader.nextInt();
+            arr[i] = num;
+            arrSum += num;
+            if (num > 0) {
+                allNeg = false;
+            }
+        }
 
+        out.println(getMaxSumSegmentLengths(arr, arrSum, allNeg));
 
-        // Отправить накопленный вывод на stdout
         out.close();
+    }
+
+    private  static int getMaxSumSegmentLengths(int[] arr, int arrSum, boolean allNeg) {
+
+        if (allNeg) return 0;
+
+        int sum = 0;
+        int sumLen = 0;
+        int start = 1;
+
+        for (int end = start + 1; end <= arr.length;) {
+
+            sum += arr[start] + arr[end - 1];
+
+            if (sum < 0) {
+                sumLen += (end - 1) - start + 1;
+                start = end;
+                end = end + 1;
+            }
+        }
+
+        return sumLen;
     }
 }
